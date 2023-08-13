@@ -1,0 +1,14 @@
+@switch($value)
+    @case(\App\Enums\Integration\IntegrationTypeEnum::Inventory)
+        @include('svg.building-storefront')
+        @break
+    @case(\App\Enums\Integration\IntegrationTypeEnum::PaymentProvider)
+        @include('svg.credit-card')
+        @break
+    @case(\App\Enums\Integration\IntegrationTypeEnum::Mail)
+        @include('svg.envelope')
+        @break
+    @case(\App\Enums\Integration\IntegrationTypeEnum::Marketing)
+        @include('svg.chart-bar')
+        @break
+@endswitch
