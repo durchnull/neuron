@@ -1,13 +1,25 @@
 # Neuron
 
-Headless E-Commerce order processing software
+Neuron is a headless order processing solution built with Laravel, designed to handle the backend processing of orders 
+and offer a seamless API for integration with front-end applications and other services like payment providers and ERPs.
+
+Disclaimer: This project is a personal learning initiative and is not intended for production use.
+The roadmap outlines the many development tasks required to bring the project closer to a release version.
+
+- API-First: RESTful API to manage orders, payments, and inventory.
+- Modular Architecture: Built for flexibility, allowing easy extension and customization.
+- Scalability Focus: Designed to support growing businesses, though not production-ready.
+- Action-Class Pattern: Implements action-class design pattern for efficient order state transitions.
+- Backend Architecture: Explore scalable, modular solutions for eCommerce backends.
+- Separation of Concerns: Isolate core business logic from external integrations for better maintainability.
+- API Design: Focus on designing clear, efficient APIs for order management.
+- Integration Potential: Enable seamless integration with various frontends and external systems (e.g., ERP, Payment Gateways).
 
 _Table of contents_
 
 1. Installation
 2. Development
-3. Documentation
-4. Roadmap
+3. Roadmap
     1. Tier 1
     2. Tier 2
 
@@ -31,19 +43,7 @@ php migrate
 php artisan merchant:demo 
 ```
 
-# 3. Documentation
-
-## Transactions
-
-<u>Synchronous transaction</u>
-
-@todo
-
-<u>Asynchronous transaction</u>
-
-@todo
-
-# 4. Roadmap
+# 3. Roadmap
 
 ## Tier 1
 
