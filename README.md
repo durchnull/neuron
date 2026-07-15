@@ -1,29 +1,22 @@
 # Neuron
 
-Neuron is a headless order processing solution built with Laravel, designed to handle the backend processing of orders 
-and offer a seamless API for integration with front-end applications and other services like payment providers and ERPs.
+A headless order processing system built with Laravel: a RESTful API for orders,
+payments, and inventory, designed to sit behind any frontend and integrate with
+external services like payment providers and ERPs.
 
-Disclaimer: This project is a personal learning initiative and is not intended for production use.
-The roadmap outlines the many development tasks required to bring the project closer to a release version.
+> **Status:** a personal learning project, not intended for production use. The
+> roadmap below tracks what a release version would still need.
 
-- API-First: RESTful API to manage orders, payments, and inventory.
-- Modular Architecture: Built for flexibility, allowing easy extension and customization.
-- Scalability Focus: Designed to support growing businesses, though not production-ready.
-- Action-Class Pattern: Implements action-class design pattern for efficient order state transitions.
-- Backend Architecture: Explore scalable, modular solutions for eCommerce backends.
-- Separation of Concerns: Isolate core business logic from external integrations for better maintainability.
-- API Design: Focus on designing clear, efficient APIs for order management.
-- Integration Potential: Enable seamless integration with various frontends and external systems (e.g., ERP, Payment Gateways).
+- **API-first** — every capability (orders, payments, coupons, rules, inventory)
+  is exposed through the REST API; [Neuron Store](https://github.com/durchnull/neuron-store)
+  is a reference cart & checkout frontend built against it.
+- **Modular integrations** — core business logic is isolated from external
+  services (payment gateways, ERPs, inventory systems), so integrations can be
+  added without touching the core.
+- **Action-class pattern** — order state transitions are modeled as discrete,
+  testable action classes.
 
-_Table of contents_
-
-1. Installation
-2. Development
-3. Roadmap
-    1. Tier 1
-    2. Tier 2
-
-# 1. Installation
+## Installation
 
 ```
 ddev start
@@ -32,55 +25,55 @@ composer install
 
 php artisan optimize
 
-php migrate
+php artisan migrate
 ```
 
-# 2. Development
+## Development
 
 **Set up a demo merchant with sales channels and resources:**
 
 ```
-php artisan merchant:demo 
+php artisan merchant:demo
 ```
 
-# 3. Roadmap
+## Roadmap
 
-## Tier 1
+### Tier 1
 
-### Actions
+#### Actions
 
 - Gate return bool to use it for can-logic?
 - User Actions
 - Check Integrations CreateAction validations again
 
-### Delete-Actions
+#### Delete-Actions
 - Action-Rule
   - Delete condition if it not used anywhere else?
 
-### Coupon
+#### Coupon
 
 - Combinable
     - Conditions on OrderRedeemCouponAction (ActionCouponEqual + )
 - Usages (as a condition. like credit)
 
-### Consequences
+#### Consequences
 
 - Credit
     - UpdateRuleAction on order confirmation
     - Reduce credit on order accept
     - Increase credit on order refund
 
-### Rules
+#### Rules
 
 - ExcludeOffers target
 - Disable timed rules after ending with scheduler
 - Condition Customer email equals
 
-### Product
+#### Product
 
 - Physical and non-physical types
 
-### Integrations
+#### Integrations
 
 - Service should generate jobs
 - Integration: Shop
@@ -99,55 +92,55 @@ php artisan merchant:demo
     - Sync stock
 - Check usage of http post() vs postJson()
 
-### VatRates
+#### VatRates
 
-### Payment
+#### Payment
 
 - Invoice (inform inventory or other integration)
 - SEPA (OrderPlaceAction, orders.payment_information attribute)
 - Add card_token to neuron payment creditcard
 
-### Transactions
+#### Transactions
 
 - Update transactions when order status changes (cancel, refund, ...)
 
-### Customer
+#### Customer
 
 - Reset new customer flag on order cancel/refund or failed transaction (order reopening)
 - Type, organization or person ?
 
-### Condition
+#### Condition
 
 - Exceptions on property and comparison mismatches
 - Not combinable with coupon
 
-### Address
+#### Address
 
 - Postbox
 - Primary address assignment
 
-### Database
+#### Database
 
 - Encrypted user data?
 
-### Commands
+#### Commands
 
 - NeuronAction: test all variations
 
-### Users
+#### Users
 
 - Improve
 
-### Authentication
+#### Authentication
 
 - SalesChannel
     - Domains
 
-### Admin
+#### Admin
 
 - Setup wizard
 
-### API
+#### API
 
 - Responses
     - 400, Bad Request, Invalid product ID or quantity
@@ -168,14 +161,14 @@ php artisan merchant:demo
 - Merchant
   - Should merchants have an API?
 
-### Validation
+#### Validation
 
 - Required target ids in actions?
 - Configuration product needs to be enabled
 - Free payment cant be disabled
 - Customer cant select free payment
 
-### Refactoring
+#### Refactoring
 
 - Reconsider Target serialization
 - Naming totals vs summary
@@ -186,14 +179,14 @@ php artisan merchant:demo
 - Refactor tests function names
 - Refactor 429 http status code
 
-### Documentation
+#### Documentation
 
-### App
+#### App
 
 - Integration Stubs Generator
 - PCI-DSS SAQ-A
 
-### Tests
+#### Tests
 
 - Rules sorting (position)
 - Rules presets
@@ -221,49 +214,49 @@ php artisan merchant:demo
 - Order place additional payment information
 - Payment changes from Proxy payment like amazon to Free after coupon redemption
 
-## Tier 2
+### Tier 2
 
-### App
+#### App
 - Caching
 
-### Registration
+#### Registration
 
-### Shipping
+#### Shipping
 
 - Smart Defaults: Pre-fill fields like shipping information based on the customer's IP address or previous purchases
   when possible. This reduces the amount of typing customers need to do.
 - Auto-Detect Location: Use geolocation to automatically detect the user's location and suggest or pre-select shipping
   options accordingly.
 
-### Address
+#### Address
 
 - Address Verification: Implement an address verification system to minimize errors and reduce the need for customers to
   manually correct their addresses.
 
-### Order
+#### Order
 
 - Order refund page
 - Order summary page with tracking information
 - Product version updates in items with delay?
 
-### Cart
+#### Cart
 
 - Inactivity emailing
 - Inactivity closing
 - Inactivity coupon
 
-### Stock
+#### Stock
 
 - Stock warnings
 
-### Actions
+#### Actions
 
 - Allow Changing product type from product to bundle? (Checking others bundle configuration)
 
-### Bundles
+#### Bundles
 
 - Can Product configurations with disabled configurations be stored initially? 
-### Integrations
+#### Integrations
 
 - Statistics Module
 - Handle multiple same integrations
@@ -276,13 +269,13 @@ php artisan merchant:demo
     - PostFinance (https://github.com/pfpayments/php-sdk, https://checkout.postfinance.ch/doc/api/web-service)
     - PayPal (https://developer.paypal.com/docs/api/orders/v2/)
 
-### Payments
+#### Payments
 - There always needs to be a default payment
 
-### Condition
+#### Condition
 
 - Automatic condition naming
 
-### Refactoring
+#### Refactoring
 
 - Better factory data
